@@ -39,8 +39,8 @@
                                 </div>
                             </td>
                             <td class="text-end text-nowrap">
-                                <a href="{{ route('ambiente.edit', ['id' => $ambiente->id]) }}" class="btn btn-primary btn-sm" aria-label="Editar {{ $ambiente->nome }}"><i class="bi bi-pen" aria-hidden="true"></i></a>
-                                <button type="button" class="btn btn-danger btn-sm" wire:click="delete({{ $ambiente->id }})" wire:confirm="Tem certeza que deseja excluir este ambiente?" aria-label="Excluir {{ $ambiente->nome }}"><i class="bi bi-trash" aria-hidden="true"></i></button>
+                                <a href="{{ route('ambiente.edit', ['id' => $ambiente->id]) }}" class="btn btn-outline-primary btn-sm" aria-label="Editar {{ $ambiente->nome }}"><i class="bi bi-pencil" aria-hidden="true"></i></a>
+                                <button type="button" class="btn btn-outline-danger btn-sm" wire:click="delete({{ $ambiente->id }})" wire:confirm="Tem certeza que deseja excluir este ambiente?" aria-label="Excluir {{ $ambiente->nome }}"><i class="bi bi-trash" aria-hidden="true"></i></button>
                             </td>
                         </tr>
                     @empty

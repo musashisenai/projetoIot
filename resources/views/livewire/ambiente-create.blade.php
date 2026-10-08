@@ -1,10 +1,10 @@
 <div class="sensor-form-page py-3">
     <div class="text-center mt-3 mb-4">
         <h2 class="h3 fw-semibold mb-1">Cadastrar ambiente</h2>
-        <p class="text-secondary mb-0">Preencha os dados para adicionar um ambiente.</p>
+        <p class="text-secondary mb-0">Preencha os dados do ambiente.</p>
     </div>
 
-    <div class="card sensor-form-card border-0 rounded-4 p-3 p-md-4 mx-auto" style="max-width: 38rem">
+    <div class="card sensor-form-card rounded-4 p-3 p-md-4 mx-auto" style="max-width: 38rem">
         <form wire:submit="store">
             <div class="mb-3">
                 <label class="form-label" for="nome">Nome</label>
