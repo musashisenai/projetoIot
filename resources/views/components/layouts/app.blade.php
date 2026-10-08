@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --content-background: #f3f5f7; }
+        body, main { background-color: var(--content-background); }
+        .card, .card-body { background-color: #eef1f4; }
+        .table { --bs-table-bg: transparent; }
+        .table-light { --bs-table-bg: #e7ebef; }
+        .sensor-surface { background-color: #eef1f4; }
+        @media (max-width: 767.98px) { main { padding-left: 1rem !important; padding-right: 1rem !important; } }
+    </style>
     @livewireStyles
 </head>
 
@@ -41,7 +50,7 @@
                         <button type="button" class="btn btn-outline-secondary d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#mobile-sidebar" aria-controls="mobile-sidebar" aria-label="Abrir menu">
                             <i class="bi bi-list" aria-hidden="true"></i>
                         </button>
-                        <h1 class="h5 fw-semibold mb-0">{{ request()->routeIs('dashboard') ? 'Dashboard' : (request()->routeIs('ambientes.*') ? 'Ambientes' : 'Sensores') }}</h1>
+                        <h1 class="h5 fw-semibold mb-0">{{ request()->routeIs('dashboard') ? 'Dashboard' : (request()->routeIs('ambiente.*') ? 'Ambientes' : 'Sensores') }}</h1>
                     </div>
                     <span class="small text-secondary">{{ now()->translatedFormat('d \\d\\e M, Y') }}</span>
                 </header>

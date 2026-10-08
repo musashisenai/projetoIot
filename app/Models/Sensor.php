@@ -13,10 +13,10 @@ class Sensor extends Model
 
     protected $fillable = [
         'ambiente_id',
-        'codigo', // TEMP01, TEMP02, LED01, LED02 ...
-        'tipo', //led, temperatura ...
+        'codigo',
+        'tipo',
         'descricao',
-        'status' //ativo ou inativo
+        'status',
     ];
 
     protected function casts(): array
@@ -24,22 +24,17 @@ class Sensor extends Model
         return ['status' => 'boolean'];
     }
 
-    public function registro(): HasMany
+    public function registros(): HasMany
     {
         return $this->hasMany(Registro::class);
+    }
+
+    public function registro(): HasMany
+    {
+        return $this->registros();
     }
 
     public function ambiente(): BelongsTo
-    {
-        return $this->belongsTo(Ambiente::class);
-    }
-
-    public function registros()
-    {
-        return $this->hasMany(Registro::class);
-    }
-
-    public function ambientes()
     {
         return $this->belongsTo(Ambiente::class);
     }

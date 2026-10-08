@@ -1,28 +1,47 @@
-<div class="p-2 text-dark bg-opacity-25 d-flex flex-column justify-content-center align-items-center">
-    <div class=" text-center mt-4">
-        <h3 class="card-title text-light-emphasis mb-3">Cadastrar Sensor</h3>
+<div class="sensor-form-page py-3">
+    <div class="text-center mt-3 mb-4">
+        <h2 class="h3 fw-semibold mb-1">Cadastrar sensor</h2>
+        <p class="text-secondary mb-0">Preencha os dados e vincule o sensor a um ambiente.</p>
     </div>
-    <div class="card shadow border border-primary p-3 mb-5 bg-white rounded container" style="max-width: 30rem">
+
+    <div class="card sensor-surface shadow-sm border-0 rounded-4 p-3 p-md-4 mx-auto" style="max-width: 38rem">
         <form wire:submit="store">
-            <div class="rol-12">
-                <p> Codigo </p>
-                <input class="col-12 mb-4" type="text" placeholder="Codigo" wire:model="codigo">
-                <p> Tipo </p>
-                <input class="col-12 mb-4" type="text" placeholder="Tipo" wire:model="tipo">
-                <p> Descrição </p>
-                <input class="col-12 mb-4" type="text" placeholder="Descrição" wire:model="descricao">
-                <p> Status </p>
-                <div class="col-12 mb-4 form-check form-switch">
-                    <input class="form-check-input" wire:model="status" type="checkbox" value=""
-                        id="checkNativeSwitch" switch>
-                    <label class="form-check-label" for="checkNativeSwitch">
-                        Ativar
-                    </label>
-                </div>
-
-                <button class="bg-primary btn text-white border-secondary rounded-2" type="submit">Cadastrar</button>
+            <div class="mb-3">
+                <label class="form-label" for="ambiente_id">Ambiente</label>
+                <select id="ambiente_id" class="form-select @error('ambiente_id') is-invalid @enderror" wire:model="ambiente_id" required>
+                    <option value="">Selecione um ambiente</option>
+                    @foreach ($ambientes as $ambiente)
+                        <option value="{{ $ambiente->id }}">{{ $ambiente->nome }}</option>
+                    @endforeach
+                </select>
+                @error('ambiente_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="codigo">Código</label>
+                <input id="codigo" class="form-control @error('codigo') is-invalid @enderror" type="text" placeholder="Ex.: TEMP-01" wire:model="codigo" required>
+                @error('codigo') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="tipo">Tipo</label>
+                <input id="tipo" class="form-control @error('tipo') is-invalid @enderror" type="text" placeholder="Ex.: Temperatura" wire:model="tipo" required>
+                @error('tipo') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="descricao">Descrição</label>
+                <textarea id="descricao" class="form-control @error('descricao') is-invalid @enderror" rows="3" placeholder="Descreva a função do sensor" wire:model="descricao" required></textarea>
+                @error('descricao') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+            <div class="form-check form-switch mb-4">
+                <input class="form-check-input" wire:model="status" type="checkbox" role="switch" id="sensor-status-create">
+                <label class="form-check-label" for="sensor-status-create">Sensor ativo</label>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-primary" type="submit" wire:loading.attr="disabled" wire:target="store">
+                    <span wire:loading.remove wire:target="store">Cadastrar</span>
+                    <span wire:loading wire:target="store">Salvando...</span>
+                </button>
+                <a class="btn btn-outline-secondary" href="{{ route('sensor.index') }}">Voltar</a>
+            </div>
         </form>
-        <a class="bg-danger btn text-white border-secondary rounded-2" href='{{ route('sensor.index') }}'>Voltar</a>
-
     </div>
 </div>
