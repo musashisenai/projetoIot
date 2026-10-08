@@ -15,6 +15,11 @@ class Ambiente extends Model
         'status'
     ];
 
+        protected function casts(): array
+    {
+        return ['status' => 'boolean'];
+    }
+
     public function sensores(){
         return $this->hasMany(Sensor::class);
     }

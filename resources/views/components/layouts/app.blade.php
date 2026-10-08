@@ -16,75 +16,44 @@
 </head>
 
 <body>
-    <div class="d-flex">
-        @if (!Route::is('login'))
-            <aside class="bg-white border-end position-fixed top-0 start-0 vh-100" style="width: 255px;">
-
+    <div class="container-fluid px-0">
+        <div class="row g-0 min-vh-100">
+            <aside class="col-auto d-none d-lg-flex flex-column bg-white border-end vh-100 position-sticky top-0" style="width: 255px;" aria-label="Navegação principal">
                 <div class="border-bottom d-flex justify-content-center align-items-center" style="height: 85px;">
-                    <h2 class="fw-medium">
-                        <i class="bi bi-cpu"></i>
-                        IOT
-                    </h2>
+                    <h2 class="fw-medium mb-0"><i class="bi bi-cpu" aria-hidden="true"></i> IOT</h2>
                 </div>
-
-                <ul class="nav flex-column gap-2 p-2 fs-5 fw-semibold">
-
-
-                    <li class="nav-item">
-                        <a href="{{ route('dashboard') }}"
-                            class="nav-link {{ request()->routeIs('dashboard') ? 'active bg-dark text-white rounded' : 'text-dark' }}">
-                            <i class="bi bi-grid"></i>
-                            Dashboard</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a
-                            class="nav-link {{ request()->routeIs('ambiente') ? 'active bg-dark text-white rounded' : 'text-dark' }}">
-                            <i class="bi bi-shop-window"></i>
-                            Ambientes</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a
-                            class="nav-link {{ request()->routeIs('registro') ? 'active bg-dark text-white rounded' : 'text-dark' }}">
-                            <i class="bi bi-card-text"></i>
-                            Registros</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a
-                            class="nav-link {{ request()->routeIs('sensor') ? 'active bg-dark text-white rounded' : 'text-dark' }}">
-                            <i class="bi bi-music-player"></i>
-                            Sensores</a>
-                    </li>
-
-
-
-
-                </ul>
-
-
+                @include('components.layouts.sidebar-links')
             </aside>
 
-            <div class="flex-grow-1" style="margin-left: 255px; min-width: 0;">
-
-                            <nav class="navbar bg-white border-bottom position-sticky top-0 px-4 justify-content-end"
-                style="height: 85px; z-index: 1000;">
-
-                <div class="d-flex text-end align-items-center gap-3">
-                    <a class="btn btn-secondary" > Logout </a>
+            <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="mobile-sidebar" aria-labelledby="mobile-sidebar-title" style="--bs-offcanvas-width: 255px;">
+                <div class="offcanvas-header border-bottom" style="height: 85px;">
+                    <h2 class="fw-medium mb-0" id="mobile-sidebar-title"><i class="bi bi-cpu" aria-hidden="true"></i> IOT</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>
                 </div>
+                <div class="offcanvas-body p-0">
+                    @include('components.layouts.sidebar-links')
+                </div>
+            </div>
 
-            </nav>
+            <div class="col d-flex flex-column min-vh-100">
+                <header class="navbar bg-white border-bottom position-sticky top-0 px-3 px-lg-4" style="height: 85px; z-index: 1000;">
+                    <div class="d-flex align-items-center gap-3">
+                        <button type="button" class="btn btn-outline-secondary d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#mobile-sidebar" aria-controls="mobile-sidebar" aria-label="Abrir menu">
+                            <i class="bi bi-list" aria-hidden="true"></i>
+                        </button>
+                        <h1 class="h5 fw-semibold mb-0">{{ request()->routeIs('dashboard') ? 'Dashboard' : (request()->routeIs('ambientes.*') ? 'Ambientes' : 'Sensores') }}</h1>
+                    </div>
+                    <span class="small text-secondary">{{ now()->translatedFormat('d \\d\\e M, Y') }}</span>
+                </header>
 
-        @endif
-        <div class="container">
-            {{ $slot }}
+                <main class="container py-4 flex-grow-1">
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-        </script>
-        @livewireScripts
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @livewireScripts
 </body>
 
 </html>

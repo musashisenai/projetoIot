@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Registro extends Model
 {
@@ -15,6 +16,16 @@ class Registro extends Model
         'unidade',
         'data_hora'
     ];
+
+    protected function casts(): array
+    {
+        return ['data_hora' => 'datetime'];
+    }
+
+    public function sensor(): BelongsTo
+    {
+        return $this->belongsTo(Sensor::class);
+    }
 
     public function sensors()
     {
