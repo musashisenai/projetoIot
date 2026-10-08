@@ -14,21 +14,25 @@ class AmbienteEdit extends Component
 
     public function mount($id)
     {
-        $Ambiente = Ambiente::find($id);
+        $ambiente = Ambiente::find($id);
 
-        $this->nome = $Ambiente->nome;
-        $this->descricao = $Ambiente->descricao;
-        $this->status = $Ambiente->status;
+        $this->ambiente_id=$ambiente->id;
+        $this->nome = $ambiente->nome;
+        $this->descricao = $ambiente->descricao;
+        $this->status = $ambiente->status;
     }
 
     public function update(){
-        $Ambiente = Ambiente::find($this->ambiente_id);
+        $ambiente = Ambiente::find($this->ambiente_id);
 
-        $Ambiente->nome = $this->nome;
-        $Ambiente->descricao = $this->descricao;
-        $Ambiente->status = $this->status;
+        $ambiente->nome = $this->nome;
+        $ambiente->descricao = $this->descricao;
+        $ambiente->status = $this->status;
 
-        $Ambiente->update();
+        $ambiente->save();
+
+        session()->flash('success', 'Atualizado');
+        return redirect()->route('ambiente.index');
 
     }
     public function render()

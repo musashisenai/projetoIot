@@ -18,7 +18,9 @@
                 </div>
 
         </div>
-        <button class="bg-primary text-white border-secondary rounded-2" type="submit eu acho que isso não deu nesse daqui não tem homem da variável S foi para Scheita Aqui Tu guarda o oral dá pra escui não é porque não tem negócio delete eu não lembro que o delete busca a função verifica se não é num ser presente eu não consegui ditar não é a gente não fez formações métodas por exemplo você tem a função edite vai fazer a função edite mas a função edit não existe você não fez a função edit você não é essa da">Salvar</button>
+        <button class="bg-primary text-white border-secondary rounded-2" type="submit">Salvar</button>
+        <a class="bg-danger btn text-white border-secondary rounded-2" href='{{ route('ambiente.index') }}'>Voltar</a>
     </form>
+    
     </div>
 </div>

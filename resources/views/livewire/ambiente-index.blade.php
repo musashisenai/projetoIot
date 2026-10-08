@@ -21,15 +21,22 @@
                         <td>{{ $a->id }}</td>
                         <td>{{ $a->nome }}</td>
                         <td>{{ $a->descricao }}</td>
-                        <td>{{ $a->status }}</td>
+                        <td><input class="form-check-input" type="checkbox" role="switch" id="status-{{ $a->id }}"
+                                wire:click="status({{ $a->id }})"
+                            @checked($a->status)
+                            {{ $a->status }}>
+                             <span class="badge bg-{{ $a->status ? 'success' : 'danger' }}">
+                                {{ $a->status ? 'ATIVO' : 'INATIVO' }}
+                             </span>
+                        </td>
                         <td>
-                            <a href="{{ route('ambiente.edit', ['id' => $a->id] )}}"
-                                class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{{ route('ambiente.edit', ['id' => $a->id]) }}"
+                                class="btn btn-primary btn-sm"><i class="bi bi-pen"></i></a>
                             <button
-                                class="btn btn-danger btn-sm"wire:click="delete({{ $a->id }})">Excluir</button>
+                                class="btn btn-danger btn-sm"wire:click="delete({{ $a->id }})"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
-                @endforeach
+@endforeach
             </tbody>
         </table>
     </div>

@@ -23,24 +23,22 @@
                         <td>{{ $s->codigo }}</td>
                         <td>{{ $s->tipo }}</td>
                         <td>{{ $s->descricao }}</td>
-                        <td><input class="form-check-input" type="checkbox"
-                            role="switch" id="status-{{$sensor->id}}"
-                            wire:click='"status({{$sensor->id}})"
-                            @checked($sensor->status)
+                        <td><input class="form-check-input" type="checkbox" role="switch" id="status-{{ $s->id }}"
+                                wire:click="status({{ $s->id }})"
+                            @checked($s->status)
                             {{ $s->status }}>
-                             <span class="badge bg-{{$sensor->status ? 'success': 'danger'}}">
-                                {{$sensor->status ? 'ATIVO':'INATIVO'}}
+                             <span class="badge bg-{{ $s->status ? 'success' : 'danger' }}">
+                                {{ $s->status ? 'ATIVO' : 'INATIVO' }}
                              </span>
                         </td>
-                            
                         <td>
                             <a href="{{ route('sensor.edit', ['id' => $s->id]) }}"
-                                class="btn btn-primary btn-sm">Editar</a>
+                                class="btn btn-primary btn-sm"><i class="bi bi-pen"></i></a>
                             <button
-                                class="btn btn-danger btn-sm"wire:click="delete({{ $s->id }})">Excluir</button>
+                                class="btn btn-danger btn-sm"wire:click="delete({{ $s->id }})"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
-                @endforeach
+@endforeach
             </tbody>
         </table>
     </div>
