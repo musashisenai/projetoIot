@@ -19,6 +19,7 @@
         .table { --bs-table-bg: transparent; }
         .table-light { --bs-table-bg: #e7ebef; }
         .sensor-surface { background-color: #eef1f4; }
+        .sensor-form-card { background-color: #eef1f4; border: 1px solid #dfe3e8 !important; box-shadow: 0 .65rem 1.75rem rgba(31, 41, 55, .14) !important; }
         @media (max-width: 767.98px) { main { padding-left: 1rem !important; padding-right: 1rem !important; } }
     </style>
     @livewireStyles

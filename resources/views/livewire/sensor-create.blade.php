@@ -4,7 +4,7 @@
         <p class="text-secondary mb-0">Preencha os dados e vincule o sensor a um ambiente.</p>
     </div>
 
-    <div class="card sensor-surface shadow-sm border-0 rounded-4 p-3 p-md-4 mx-auto" style="max-width: 38rem">
+    <div class="card sensor-form-card rounded-4 p-3 p-md-4 mx-auto" style="max-width: 38rem">
         <form wire:submit="store">
             <div class="mb-3">
                 <label class="form-label" for="ambiente_id">Ambiente</label>

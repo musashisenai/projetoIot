@@ -1,48 +1,53 @@
-<div>
-    <div>
-        <h2 class="d-flex text-center mt-4">Ambientes</h2>
+<div class="sensor-list-page">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mt-4 mb-3">
+        <div>
+            <h2 class="h3 fw-semibold mb-1">Ambientes</h2>
+            <p class="text-secondary mb-0">Ambientes cadastrados e seus espaços.</p>
+        </div>
+        <a href="{{ route('ambiente.create') }}" class="btn btn-primary rounded-3 text-decoration-none"><i class="bi bi-plus-lg me-1" aria-hidden="true"></i> Cadastrar ambiente</a>
     </div>
 
-    <div class="card-body shadow">
-        <table class="table table-striped border-secondary ">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
+    @endif
 
-            <tbody>
-                @foreach ($ambientes as $a)
+    <div class="sensor-surface card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
                     <tr>
-                        <td>{{ $a->id }}</td>
-                        <td>{{ $a->nome }}</td>
-                        <td>{{ $a->descricao }}</td>
-                        <td><input class="form-check-input" type="checkbox" role="switch" id="status-{{ $a->id }}"
-                                wire:click="status({{ $a->id }})"
-                            @checked($a->status)
-                            {{ $a->status }}>
-                             <span class="badge bg-{{ $a->status ? 'success' : 'danger' }}">
-                                {{ $a->status ? 'ATIVO' : 'INATIVO' }}
-                             </span>
-                        </td>
-                        <td>
-                            <a href="{{ route('ambiente.edit', ['id' => $a->id]) }}"
-                                class="btn btn-primary btn-sm"><i class="bi bi-pen"></i></a>
-                            <button
-                                class="btn btn-danger btn-sm"wire:click="delete({{ $a->id }})"><i class="bi bi-trash"></i></button>
-                        </td>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-end">Ações</th>
                     </tr>
-@endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse ($ambientes as $ambiente)
+                        <tr wire:key="ambiente-{{ $ambiente->id }}">
+                            <td>{{ $ambiente->id }}</td>
+                            <td class="fw-semibold">{{ $ambiente->nome }}</td>
+                            <td>{{ $ambiente->descricao }}</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <input class="form-check-input m-0" type="checkbox" role="switch" id="status-{{ $ambiente->id }}" wire:click="status({{ $ambiente->id }})" @checked($ambiente->status) aria-label="Alternar status de {{ $ambiente->nome }}">
+                                    <span class="badge rounded-pill bg-{{ $ambiente->status ? 'success' : 'secondary' }}">{{ $ambiente->status ? 'ATIVO' : 'INATIVO' }}</span>
+                                </div>
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <a href="{{ route('ambiente.edit', ['id' => $ambiente->id]) }}" class="btn btn-primary btn-sm" aria-label="Editar {{ $ambiente->nome }}"><i class="bi bi-pen" aria-hidden="true"></i></a>
+                                <button type="button" class="btn btn-danger btn-sm" wire:click="delete({{ $ambiente->id }})" wire:confirm="Tem certeza que deseja excluir este ambiente?" aria-label="Excluir {{ $ambiente->nome }}"><i class="bi bi-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr><td colspan="5" class="text-center text-secondary py-5">Nenhum ambiente cadastrado ainda.</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div>
-        
-    <a  href="{{ route('ambiente.create') }}"
-        class="bg-primary rounded-4 text-white p-2 text-decoration-none float-sm-end"><i class="bi bi-patch-plus"></i> Cadastrar Ambiente</a>
-</div>
 </div>
